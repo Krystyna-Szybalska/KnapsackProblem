@@ -102,14 +102,25 @@ namespace KnapsackProblem
                     Console.Write(i + ", ");
                 }
             }
-            Console.WriteLine("pozostała wolna przestrzeń: " + emptySpaceLeftParent);
 
             Console.WriteLine();
-            Console.WriteLine("Zmiany pozostałej wolnej przestrzeni z interacji na iterację: ");
+            Console.WriteLine();
+            Console.WriteLine("Zmiany pozostałej wolnej przestrzeni z iteracji na iterację (w nawiasie ilość powtórzeń danej wartości): ");
+            int howManyTimes = 0;
             for (int i = 0; i < emptySpace.Count; i++)
             {
-                if (i == emptySpace.Count-1) Console.Write(emptySpace[i]);
-                else Console.Write(emptySpace[i] + " >> ");
+                if (i < emptySpace.Count - 1 && (emptySpace[i] == emptySpace[i + 1])) howManyTimes++;
+                else
+                {
+                    if (howManyTimes == 0) Console.Write($"{emptySpace[i]} >> ");
+                    else
+                    {
+                        Console.Write($"{emptySpace[i]} ({howManyTimes}) >> ");
+                        howManyTimes = 0;
+                    }
+                }
+                if (i == emptySpace.Count - 1) Console.WriteLine($"Końcowo zostało {emptySpace[i]} wolnej przestrzeni");
+
             }
         }
 
